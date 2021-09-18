@@ -14,7 +14,7 @@
                         {!! Form::label('expiration_date', '使用期限：') !!}
                         {!! Form::date('expiration_date', null, ['class' => 'form-control']) !!}
                     </div>
-    
+                    
                     {!! Form::submit('登録', ['class' => 'btn btn-primary']) !!}
     
                 {!! Form::close() !!}

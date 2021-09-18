@@ -4,7 +4,7 @@
 
     <h1>My pouch</h1>
     @if (count($items) > 0)
-        <table class="table table-striped">
+        <table class="table table-striped table-light">
             <thead>
                 <tr>
                     <th>No</th>
