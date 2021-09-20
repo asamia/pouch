@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>My pouch</h1>
+    <h1>アイテム一覧</h1>
     @if (count($items) > 0)
         <table class="table table-striped table-light">
             <thead>
