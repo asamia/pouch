@@ -11,12 +11,16 @@
         
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     </head>
-
+    
     <body>
+        
+        {{-- ナビゲーションバー --}}
+        @include('layouts.navbar')
+        
         <div class="container">
+            
              {{-- エラーメッセージ --}}
             @include('error_messages')
-            
             @yield('content')
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"</script>
