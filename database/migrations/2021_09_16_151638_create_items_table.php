@@ -19,6 +19,8 @@ class CreateItemsTable extends Migration
             $table->date('purchase_date');
             $table->date('expiration_date');
             $table->timestamps();
+            
+             
         });
     }
 

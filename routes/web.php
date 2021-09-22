@@ -14,8 +14,6 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/', 'ItemsController@index');
-Route::resource('items', 'ItemsController');
 
 // ユーザ登録
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
@@ -28,4 +26,7 @@ Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 
-
+Route::group(['middleware' => 'auth'], function () {
+Route::get('/', 'ItemsController@index');
+Route::resource('items', 'ItemsController');
+});
