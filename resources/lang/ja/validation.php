@@ -93,7 +93,7 @@ return [
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'The :attribute format is invalid.',
     'numeric' => 'The :attribute must be a number.',
-    'password' => 'The password is incorrect.',
+    'password' => 'パスワードが間違っています。',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
     'required' => ':attributeは必須です。',
@@ -150,6 +150,9 @@ return [
         'content' => 'アイテム',
         'purchase_date' => '購入日',
         'expiration_date' => '使用期限',
+        'email' => 'メールアドレス',
+        'password' => 'パスワード',
+        'name' => 'お名前',
         ],
 
 ];
