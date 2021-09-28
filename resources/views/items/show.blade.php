@@ -21,6 +21,7 @@
         </tr>
     </table>
             </div>
+            
     </div>
     <div style="display:inline-flex">
       {{-- 編集ページへのリンク --}}

@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <title>Mypouch</title>
-        <!--レスポンシブ対応-->
+        {{-- レスポンシブ対応 --}}
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!--SEOのためのページ詳細表示-->
+        {{-- SEOのためのページ詳細表示 --}}
         <meta name="description" content="化粧品使用期限管理アプリ">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
         

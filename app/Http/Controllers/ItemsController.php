@@ -4,29 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Item;
+use App\User;
+
 
 class ItemsController extends Controller
 {
     /**
      * 一覧表示処理
      *
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function index()
     {
-         // アイテム一覧を取得
-        $items = Item::all();
-
+        $data = [];
+        if (\Auth::check()) { //認証済みの場合
+        //認証済みユーザを取得
+        $user = \Auth::user();
+        // ユーザのアイテム一覧を作成日時の昇順で取得
+        $items = $user->items()->orderBy('created_at', 'asc')->paginate(10);
+        
+        $data = [
+                'user' => $user,
+                'items' => $items,
+            ];
+        }
+        
         // 一覧表示
-        return view('items.index', [
-            'items' => $items,
-        ]);
+        return view('items.index', $data);
     }
 
     /**
      * 新規登録画面表示処理
      *
-     * @return \Illuminate\Http\Response
+     *
      */
     public function create()
     {
@@ -41,8 +51,7 @@ class ItemsController extends Controller
     /**
      * 新規登録処理
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function store(Request $request)
     {
@@ -53,13 +62,13 @@ class ItemsController extends Controller
             'expiration_date' => 'required'
         ]);
         
-        $item = new Item;
         
-        // 新規アイテムを保存
-        $item->content = $request->content;
-        $item->purchase_date = $request->purchase_date;
-        $item->expiration_date = $request->expiration_date;
-        $item->save();
+        // 認証済みユーザーの新規アイテムを保存
+        $request->user()->items()->create([ 
+        'content'=> $request->content,
+        'purchase_date' => $request->purchase_date,
+        'expiration_date' => $request->expiration_date,
+        ]);
         
         // トップページへリダイレクトさせる
         return redirect('/');
@@ -73,13 +82,19 @@ class ItemsController extends Controller
      */
     public function show($id)
     {
-         // idの値でアイテムを検索して取得
-         //レコードが存在しない時は404エラーを出す
-        $item = Item::findOrFail($id);
-
+        // idの値でユーザを検索して取得
+        $user = User::findOrFail($id);
+ 
+        // 関係するモデルの件数をロード
+        $user->loadRelationshipCounts();
+        
+        // ユーザのアイテム一覧を作成日時の昇順で取得
+        $items = $user->items()->orderBy('created_at', 'asc')->paginate(10);
+        
         // アイテム詳細で表示
         return view('items.show', [
-            'item' => $item,
+            'user' => $user,
+            'items' => $items,
         ]);
     }
 
@@ -138,8 +153,11 @@ class ItemsController extends Controller
     {
         // idの値でアイテムを検索して取得
         $item = Item::findOrFail($id);
-        // メッセージを削除
-        $item->delete();
+        
+        // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
+        if (\Auth::id() === $item->user_id) {
+            $item->delete();
+        }
 
         // トップページへリダイレクトさせる
         return redirect('/');
