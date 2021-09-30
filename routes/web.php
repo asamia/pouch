@@ -27,6 +27,8 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 
 Route::group(['middleware' => 'auth'], function () {
-Route::get('/', 'ItemsController@index');
-Route::resource('items', 'ItemsController');
+    Route::get('/', 'ItemsController@index');
+    Route::resource('items', 'ItemsController');
+    
 });
+    

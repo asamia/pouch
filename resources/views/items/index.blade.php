@@ -20,7 +20,7 @@
                     <td>{{ $item->content }}</td>
                     <td>{{ $item->purchase_date }}</td>
                     <td>{{ $item->expiration_date }}</td>
-                </tr>
+                </tr>　
                 @endforeach
             </tbody>
         </table>

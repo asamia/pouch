@@ -82,19 +82,12 @@ class ItemsController extends Controller
      */
     public function show($id)
     {
-        // idの値でユーザを検索して取得
-        $user = User::findOrFail($id);
- 
-        // 関係するモデルの件数をロード
-        $user->loadRelationshipCounts();
-        
-        // ユーザのアイテム一覧を作成日時の昇順で取得
-        $items = $user->items()->orderBy('created_at', 'asc')->paginate(10);
-        
+        // アイテムを取得
+        $item = Item::findOrFail($id);
+
         // アイテム詳細で表示
         return view('items.show', [
-            'user' => $user,
-            'items' => $items,
+            'item' => $item,
         ]);
     }
 
