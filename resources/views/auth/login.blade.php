@@ -18,12 +18,11 @@
                     {!! Form::label('password', 'パスワード') !!}
                     {!! Form::password('password', ['class' => 'form-control']) !!}
                 </div>
-
+                <div class="text-center">
                 {!! Form::submit('ログイン', ['class' => 'btn btn-primary']) !!}
+                </div>
             {!! Form::close() !!}
-
-            {{-- ユーザ登録ページへのリンク --}}
-            <p class="mt-3">{!! link_to_route('signup.get', '新規登録') !!}</p>
+                
         </div>
     </div>
 @endsection

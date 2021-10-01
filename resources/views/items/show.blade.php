@@ -2,10 +2,9 @@
 
 @section('content')
 
-
     <h1>アイテム詳細</h1>
     <div class="row">
-            <div class="col-6">
+           <div class="col-6">
     <table class="table table-striped table-light">
         <tr>
             <th>アイテム</th>
@@ -31,4 +30,5 @@
         {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
     </div>
+</div>
 @endsection
