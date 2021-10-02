@@ -1,12 +1,12 @@
 @extends('layouts.common')
 
 @section('content')
-
+    <div class="text-center">
     <h1>アイテム詳細</h1>
+    </div>
     <div class="row">
-           <div class="col-6">
+           <div class="col-sm-6 offset-sm-3">
     <table class="table table-striped table-light">
-        <tr>
             <th>アイテム</th>
             <td>{{ $item->content }}</td>
         </tr>
@@ -19,16 +19,15 @@
             <td>{{ $item->expiration_date }}</td>
         </tr>
     </table>
-            </div>
             
     </div>
-    <div style="display:inline-flex">
+    <div class="text-center">
       {{-- 編集ページへのリンク --}}
     {!! link_to_route('items.edit', 'このアイテムを編集', ['item' => $item->id], ['class' => 'btn btn-secondary']) !!}
     {{-- メッセージ削除フォーム --}}
     {!! Form::model($item, ['route' => ['items.destroy', $item->id], 'method' => 'delete']) !!}
         {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
-    {!! Form::close() !!}
     </div>
+    {!! Form::close() !!}
 </div>
 @endsection

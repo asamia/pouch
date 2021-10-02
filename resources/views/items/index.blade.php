@@ -6,7 +6,7 @@
     @if (count($items) > 0)
         <table class="table table-striped table-light">
             <thead>
-                <tr>
+                <tr class="heading">
                     <th>アイテム</th>
                     <th>購入日</th>
                     <th>使用期限</th>
@@ -16,9 +16,9 @@
             <tbody>
                 @foreach ($items as $item)
                 <tr>
-                    <td>{{ $item->content }}</td>
-                    <td>{{ $item->purchase_date }}</td>
-                    <td>{{ $item->expiration_date }}</td>
+                    <td data-label="アイテム">{{ $item->content }}</td>
+                    <td data-label="購入日">{{ $item->purchase_date }}</td>
+                    <td data-label="使用期限">{{ $item->expiration_date }}</td>
                     <td>{!! link_to_route('items.show', '詳細', ['item' => $item->id], ['class' => 'btn btn-secondary']) !!}</td>
                 </tr>　
                 @endforeach

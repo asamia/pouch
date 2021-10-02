@@ -7,6 +7,24 @@ body {
 }
 
 .btn-danger {
-    margin: 0 0 0 10px;
+    margin: 10px;
 }
 
+
+@media(max-width: 500px) {
+  .heading {
+      display: none;
+  }
+  
+  td {
+      display: block;
+  }    
+
+  td::before {
+    content: attr(data-label);
+    font-size: .875rem;
+    color: #666;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+}

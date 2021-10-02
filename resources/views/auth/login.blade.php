@@ -22,7 +22,8 @@
                 {!! Form::submit('ログイン', ['class' => 'btn btn-primary']) !!}
                 </div>
             {!! Form::close() !!}
-                
+            {{-- 新規ユーザー登録リンク --}}
+            <p class="mt-2">登録はこちらから☆ {!! link_to_route('signup.get', '新規登録') !!}</p>
         </div>
     </div>
 @endsection
