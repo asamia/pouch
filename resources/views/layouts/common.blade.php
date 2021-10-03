@@ -7,6 +7,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         {{-- SEOのためのページ詳細表示 --}}
         <meta name="description" content="化粧品使用期限管理アプリ">
+        {{-- ファビコン --}}
+        <link rel="icon" href="/favicon.ico" id="favicon">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+        {{-- Bootstrap --}}
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
         
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
