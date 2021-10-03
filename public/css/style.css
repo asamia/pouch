@@ -1,5 +1,18 @@
 body {
     background-color: #dcc8dc;
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    font-size: 17px;
+    border-top: 2px solid #202020;
+    text-align: center;
 }
 
 .btn-primary {
