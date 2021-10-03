@@ -3,6 +3,10 @@
 @section('content')
 
     <h1>アイテム一覧</h1>
+    <div class="add-item">
+     {{-- アイテム作成ページへのリンク --}}
+    {!! link_to_route('items.create', '新規アイテム登録', [], ['class' => 'btn btn-primary']) !!}
+    </div>
     @if (count($items) > 0)
         <table class="table table-striped table-light">
             <thead>
@@ -27,8 +31,6 @@
     @endif
     {{-- ページネーション --}}
     {{ $items->links() }}
-    {{-- アイテム作成ページへのリンク --}}
-    {!! link_to_route('items.create', '新規アイテム登録', [], ['class' => 'btn btn-primary']) !!}
     
 
 @endsection

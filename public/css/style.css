@@ -10,6 +10,10 @@ body {
     margin: 10px;
 }
 
+.add-item {
+    text-align:right;
+}
+
 
 @media(max-width: 500px) {
   .heading {
