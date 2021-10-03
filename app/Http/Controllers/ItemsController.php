@@ -70,8 +70,8 @@ class ItemsController extends Controller
         'expiration_date' => $request->expiration_date,
         ]);
         
-        // トップページへリダイレクトさせる
-        return redirect('/');
+        // 一覧ページへリダイレクトさせる
+        return redirect('/index');
     }
 
     /**
@@ -132,8 +132,8 @@ class ItemsController extends Controller
         $item->expiration_date = $request->expiration_date;
         $item->save();
 
-        // トップページへリダイレクトさせる
-        return redirect('/');
+        // 一覧ページへリダイレクトさせる
+        return redirect('/index');
     }
 
     /**
@@ -152,7 +152,7 @@ class ItemsController extends Controller
             $item->delete();
         }
 
-        // トップページへリダイレクトさせる
-        return redirect('/');
+       // 一覧ページへリダイレクトさせる
+        return redirect('/index');
     }
 }

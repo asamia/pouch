@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/welcome', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
@@ -27,7 +27,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', 'ItemsController@index');
+    Route::get('/index', 'ItemsController@index');
     Route::resource('items', 'ItemsController');
     
 });
