@@ -21,6 +21,7 @@ Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
 
 
 // 認証
+Route::get('/guest', 'Auth\LoginController@guestLogin')->name('login.guest'); //ゲストログイン
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
@@ -29,6 +30,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/index', 'ItemsController@index');
     Route::resource('items', 'ItemsController');
-    
+   
+   
 });
     

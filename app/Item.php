@@ -8,6 +8,7 @@ class Item extends Model
 {
     protected $fillable = [
         'content', 'purchase_date', 'expiration_date',
+        'image'
         ];
     
     

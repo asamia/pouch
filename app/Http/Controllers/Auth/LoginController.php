@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+//追加
+use Illuminate\Support\Facades\Auth;
+
 class LoginController extends Controller
 {
     /*
@@ -36,5 +39,21 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+    
+   
+    public function guestLogin()
+    {
+        $email = 'guest@xxx.com';
+        $password = 'guestxxx';
+        
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            //認証に成功した 
+            
+            return redirect('/index');
+        }
+        
+        return redirect('/');
+     
     }
 }
