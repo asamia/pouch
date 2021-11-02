@@ -14,7 +14,7 @@ class AddImageToItemsTable extends Migration
     public function up()
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->text('image');//カラム追加
+            $table->text('image')->nullable();//カラム追加
         });
     }
 

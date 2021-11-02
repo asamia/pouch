@@ -12,7 +12,6 @@
             <thead>
                 <tr class="heading">
                     <th>アイテム</th>
-                    <th></th>
                     <th>購入日</th>
                     <th>使用期限</th>
                     <th></th>
@@ -22,13 +21,6 @@
                 @foreach ($items as $item)
                 <tr>
                     <td data-label="アイテム">{{ $item->content }}</td>
-                    <td>
-                    @if($item->image == null)
-                      <img src="{{ asset('images/cosme.png') }}">
-                    @else
-                      <img src="{{ asset('storage/uploads'. $item->image) }}">
-                    @endif
-                    </td>
                     <td data-label="購入日">{{ $item->purchase_date }}</td>
                     <td data-label="使用期限">{{ $item->expiration_date }}</td>
                     <td>{!! link_to_route('items.show', '詳細', ['item' => $item->id], ['class' => 'btn btn-secondary']) !!}</td>

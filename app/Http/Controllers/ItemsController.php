@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Item;
 use App\User;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 
 class ItemsController extends Controller
 {
@@ -26,6 +26,7 @@ class ItemsController extends Controller
         $data = [
                 'user' => $user,
                 'items' => $items,
+                
             ];
         }
         
@@ -64,7 +65,7 @@ class ItemsController extends Controller
         ]);
             
         
-        // 認証済みユーザーの新規アイテムを保存
+        // 認証済みユーザーの新規アイテムをDBに保存
         $request->user()->items()->create([ 
         'content'=> $request->content,
         'purchase_date' => $request->purchase_date,
@@ -73,26 +74,13 @@ class ItemsController extends Controller
         ]);
         
         
-        $image = $request->file('image');
         
-        //元のファイル名を拡張子とともに取得する
-        $filenameWithExt = $request->file('image')->getClientOriginalName();
-        //元ファイル名のみ取得
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        //拡張子の取得
-        $extension = $request->file('image')->getClientOriginalExtension();
-        //新しいファイル名をつける(時刻をいれる)
-        $filenameToStore = $filename.'_'.time().'.'.$extension;
-        //画像をs3に保存
-        $path = Storage::disk('s3')->putFileAs('uploads', $filenameToStore, 'public');
-        dd($path);
-        //アップロード先のファイルパスを取得
-        $url = Storage::disk('s3')->url($path);
-        
-        
-        // 一覧ページへリダイレクトさせる
+         // 一覧ページへリダイレクトさせる
         return redirect('/index');
+        
     }
+
+    
 
     /**
      * 取得表示処理

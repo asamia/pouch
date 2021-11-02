@@ -6,7 +6,7 @@
     </div>
         <div class="row">
             <div class="col-sm-6 offset-sm-3">
-                {!! Form::model($item, ['route' => 'items.store', 'enctype' => "multipart/form-data"]) !!}
+                {!! Form::model($item, ['route' => 'items.store']) !!}
                     <div class="form-group">
                         {!! Form::label('content', 'アイテム：') !!}
                         {!! Form::text('content', null, ['class' => 'form-control']) !!}
@@ -14,7 +14,6 @@
                         {!! Form::date('purchase_date', null, ['class' => 'form-control']) !!}
                         {!! Form::label('expiration_date', '使用期限：') !!}
                         {!! Form::date('expiration_date', null, ['class' => 'form-control']) !!}
-                        {!! Form::file('image') !!}
                     </div>
                     <div class="text-center">
                     {!! Form::submit('登録', ['class' => 'btn btn-primary']) !!}
