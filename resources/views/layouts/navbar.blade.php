@@ -10,7 +10,7 @@
                 <ul class="navbar-nav me-auto"></ul>
                 <ul class="navbar-nav">
                 @if (Auth::check())
-                        {{ Auth::user()->name }}
+                        <li class="nav-item"><a class="nav-link active">{{ Auth::user()->name }}</a></li>
                         {{-- ログアウトへのリンク --}}
                         <li class="nav-item">{!! link_to_route('logout.get', 'ログアウト', [], ['class' => 'nav-link']) !!}</li>
                     
