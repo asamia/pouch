@@ -9,13 +9,58 @@ use Illuminate\Support\Facades\Storage;
 
 class ItemsController extends Controller
 {
+       /**
+     * 新規登録処理
+     *
+     * 
+     */
+    public function store(Request $request)
+    {
+        // バリデーション
+        $request->validate([
+            'content' => 'required|max:255',
+            'purchase_date' => 'required',
+            'expiration_date' => 'required',
+            'image' => ['file','mimes:jpeg,png,jpg']
+        ]);
+            
+        
+        if($request->image) {
+        //元のファイル名を拡張子とともに取得する
+        $filenameWithExt = $request->file('image')->getClientOriginalName();
+        //元ファイル名のみ取得
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        //拡張子の取得
+        $extension = $request->file('image')->getClientOriginalExtension();
+        //新しいファイル名をつける(時刻をいれる)
+        $filenameToStore = $filename.'_'.time().'.'.$extension;
+        //アップロードフォルダに保存
+        $path = $request->file('image')->storeAs('public/uploads', $filenameToStore);
+        //pathをpublic→storageに変換する
+        $newpath = str_replace('public', 'storage', $path);
+        }
+        
+        //DBに保存
+        $request->user()->items()->create([ 
+        'content'=> $request->content,
+        'purchase_date' => $request->purchase_date,
+        'expiration_date' => $request->expiration_date,
+        'image' => $newpath,
+        ]);
+        
+         // 一覧ページへリダイレクトさせる
+        return redirect('/index');
+        
+    }
+    
+    
     /**
      * 一覧表示処理
      *
      * 
      */
     public function index()
-    {
+    {   
         $data = [];
         if (\Auth::check()) { //認証済みの場合
         //認証済みユーザを取得
@@ -26,10 +71,8 @@ class ItemsController extends Controller
         $data = [
                 'user' => $user,
                 'items' => $items,
-                
             ];
         }
-        
         // 一覧表示
         return view('items.index', $data);
     }
@@ -49,39 +92,7 @@ class ItemsController extends Controller
         ]);
     }
 
-    /**
-     * 新規登録処理
-     *
-     * 
-     */
-    public function store(Request $request)
-    {
-        // バリデーション
-        $request->validate([
-            'content' => 'required|max:255',
-            'purchase_date' => 'required',
-            'expiration_date' => 'required',
-            'image' => ['file','mimes:jpeg,png,jpg']
-        ]);
-            
-        
-        // 認証済みユーザーの新規アイテムをDBに保存
-        $request->user()->items()->create([ 
-        'content'=> $request->content,
-        'purchase_date' => $request->purchase_date,
-        'expiration_date' => $request->expiration_date,
-        'image' => $request->image,
-        ]);
-        
-        
-        
-         // 一覧ページへリダイレクトさせる
-        return redirect('/index');
-        
-    }
-
-    
-
+ 
     /**
      * 取得表示処理
      *

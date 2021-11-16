@@ -30,7 +30,5 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/index', 'ItemsController@index');
     Route::resource('items', 'ItemsController');
-    // Route::post('upload','UploadController@store')->name('upload.store');
-   
 });
        
