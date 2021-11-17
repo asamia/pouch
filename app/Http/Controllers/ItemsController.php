@@ -25,6 +25,28 @@ class ItemsController extends Controller
         ]);
             
         
+        $image = $request->file('image');
+        
+        //画像をs3のuploadsフォルダに格納する
+        $path_s3 = Storage::disk('s3')->putFile('uploads', $image, 'public');
+        //アップロード先のファイルパスを取得
+        $url_s3 = Storage::disk('s3')->url($path_s3);
+        
+        //DBに保存
+        $request->user()->items()->create([ 
+        'content'=> $request->content,
+        'purchase_date' => $request->purchase_date,
+        'expiration_date' => $request->expiration_date,
+        'image' => $url_s3,
+        ]);
+        
+        
+        // 一覧ページへリダイレクトさせる
+        return redirect('/index');
+        
+        
+        /*ローカル環境の場合の処理
+        
         if($request->image) {
         //元のファイル名を拡張子とともに取得する
         $filenameWithExt = $request->file('image')->getClientOriginalName();
@@ -34,10 +56,11 @@ class ItemsController extends Controller
         $extension = $request->file('image')->getClientOriginalExtension();
         //新しいファイル名をつける(時刻をいれる)
         $filenameToStore = $filename.'_'.time().'.'.$extension;
-        //アップロードフォルダに保存
+        //uploadsフォルダに保存
         $path = $request->file('image')->storeAs('public/uploads', $filenameToStore);
         //pathをpublic→storageに変換する
         $newpath = str_replace('public', 'storage', $path);
+        
         }
         
         //DBに保存
@@ -48,10 +71,16 @@ class ItemsController extends Controller
         'image' => $newpath,
         ]);
         
-         // 一覧ページへリダイレクトさせる
+        // 一覧ページへリダイレクトさせる
         return redirect('/index');
         
-    }
+        ローカル環境の場合の処理はここまで
+        */
+    }   
+      
+        
+        
+      
     
     
     /**
