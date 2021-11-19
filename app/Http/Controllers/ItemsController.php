@@ -28,7 +28,7 @@ class ItemsController extends Controller
         $image = $request->file('image');
         
         //画像をs3のuploadsフォルダに格納する
-        $path_s3 = Storage::disk('s3')->putFile('uploads', $image, 'public');
+        $path_s3 = Storage::disk('s3')->putFile('/uploads', $image, 'public');
         //アップロード先のファイルパスを取得
         $url_s3 = Storage::disk('s3')->url($path_s3);
         
